@@ -1,6 +1,8 @@
 django-sequences
 ################
 
+Project forked from https://github.com/aaugustin/django-sequences to add support for pseudo-random sequences.
+
 The problem
 ===========
 

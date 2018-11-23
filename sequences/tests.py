@@ -36,6 +36,22 @@ class SingleConnectionTestsMixin(object):
             get_next_value('error', initial_value=1, reset_value=1)
 
 
+class PseudoRandomTestsMixin(TestCase):
+
+    def test_all_numbers_are_generated(self):
+        s = []
+        for i in range(70):
+            s.append(get_next_value(reset_value=71, offset=1))
+        self.assertEqual(len(s), 70)
+        self.assertEqual(len(set(s)), 70)
+
+    def test_sequences_are_different(self):
+        self.assertNotEqual(
+            get_next_value('seq1', reset_value=71, offset=1),
+            get_next_value('seq2', reset_value=71, offset=2)
+        )
+
+
 class SingleConnectionInAutocommitTests(SingleConnectionTestsMixin,
                                         TransactionTestCase):
     pass
